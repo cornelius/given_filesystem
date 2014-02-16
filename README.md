@@ -98,3 +98,16 @@ path = given_directory "mydir" do
   end
 end
 ```
+
+This will create a file system structure like this:
+
+```
+/tmp/
+  given_filesystem/
+    20140216-74592/
+      one/
+        myfile
+        myotherfile
+      two/
+        myfile2
+```
