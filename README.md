@@ -112,3 +112,8 @@ temporary directory, which you can then use in your tests to access the data:
       two/
         myfile2
 ```
+
+## Contact
+
+If you have questions or comments about GivenFilesystem don't hesitate to get in
+touch with [Cornelius Schumacher](mailto:schumacher@kde.org).
