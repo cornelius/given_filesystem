@@ -99,7 +99,8 @@ path = given_directory "mydir" do
 end
 ```
 
-This will create a file system structure like this:
+This will create the following file system structure and return the path to the
+temporary directory, which you can then use in your tests to access the data:
 
 ```
 /tmp/
