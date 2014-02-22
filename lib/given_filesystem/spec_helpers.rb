@@ -64,7 +64,7 @@ module GivenFilesystemSpecHelpers
   
   def check_initialization
     if !@given_filesystem
-      raise "Call given_filesystem before calling other methods"
+      raise "Call use_given_filesystem before calling other methods"
     end
   end
 end
