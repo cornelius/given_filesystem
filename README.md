@@ -13,18 +13,34 @@ GivenFilesystem provides helpers for RSpec and a standalone class.
 ### Setup
 
 To use the GivenFilesystem helpers in a RSpec test you have to include the
-`GivenFileSystemSpecHelpers` module to get access to the helper methods:
+`GivenFileSystemSpecHelpers` module to get access to the helper methods, and
+set up the temporary test directory by calling `use_given_filesystem`:
 
 ```ruby
 include GivenFileSystemSpecHelpers
+
+describe "some test" do
+  use_given_filesystem
+
+  it "tests something" do
+    ...
+  end
+end
 ```
 
-To make use of the helpers you have to activate the test file system to
-initialize the temporary test directory:
 
-```ruby
-use_given_filesystem
-```
+### File fixtures
+
+With GivenFilesystem you can create directories and files with pre-defined
+content. These can be used as test fixtures for code reading from a file
+system.
+
+File fixtures, i.e. files containing test content, are stored in the
+`spec/data/` directory. GivenFilesystem provides helper functions to create
+temporary directories with defined structure and content using the file
+fixtures. The file names can be taken directly from the name of the file
+fixtures or be defined when creating the test directory structure.
+
 
 ### Creating directories
 
@@ -42,15 +58,6 @@ Create a temporary directory with a given name for writing test data:
 path = given_directory "myname"
 ```
 
-Create a directory structure:
-
-```ruby
-given_directory "mydir" do
-  path = given_directory "data"
-  
-  do_something(path)
-end
-```
 
 ### Creating files
 
@@ -62,25 +69,26 @@ path = given_dummy_file
 
 Use the returned path to access the file.
 
-Create a temporary file with given content:
+Create a temporary file with given content take from a file fixture:
 
 ```ruby
-path = given_file "mycontent"
+path = given_file "myfixture"
 ```
 
-The content of the file is taken from a file stored in your `spec/data`
+The content of the file is taken from a file fixture stored in your `spec/data`
 directory. The name of the created file is the same as the name of the file
 containing the test content.
 
 Create a temporary file with given content under a different name:
 
 ```ruby
-path = given_file "myspecialdata", :from => "mycontent"
+path = given_file "myspecialfile", :from => "myfixture"
 ```
 
-The content of the file is taken from the file `spec/data/mycontent` and stored
-under the name `myspecialdata` in a temporary directory. You can access it under
+The content of the file is taken from the file `spec/data/myfixture` and stored
+under the name `myspecialfile` in a temporary directory. You can access it under
 the returned path.
+
 
 ### Creating structures of directories and files
 
@@ -113,7 +121,16 @@ temporary directory, which you can then use in your tests to access the data:
         myfile2
 ```
 
+
+## License
+
+You may use GivenFilesystem under the terms of the MIT license.
+
 ## Contact
 
 If you have questions or comments about GivenFilesystem don't hesitate to get in
 touch with [Cornelius Schumacher](mailto:schumacher@kde.org).
+
+## Thanks
+
+Thanks to David Majda for reviewing code and documentation.
