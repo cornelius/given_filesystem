@@ -42,7 +42,7 @@ describe GivenFilesystem do
       end
     end
 
-    describe "#given_file" do
+    describe "#given_dummy_file" do
       it "creates unnamed dummy file" do
         path = given_dummy_file
         expect( File.exists? path ).to be_true
@@ -55,7 +55,9 @@ describe GivenFilesystem do
         expect( File.exists? path ).to be_true
         expect( File.directory? path ).to be_false
       end
+    end
 
+    describe "#given_file" do
       it "creates file with content" do
         path = given_file "testcontent"
         expect( path ).to match /\/testcontent$/
