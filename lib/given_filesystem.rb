@@ -76,7 +76,7 @@ class GivenFilesystem
         if !File.exists? test_data
           raise "Test data file '#{test_data}' doesn't exist"
         end
-        file.puts File.read(test_data)
+        file.write File.read(test_data)
       else
         file.puts "GivenFilesystem was here"
       end
