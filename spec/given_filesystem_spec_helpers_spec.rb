@@ -41,6 +41,18 @@ describe GivenFilesystem do
         expect( path ).to match /\/hello\/world$/
       end
     end
+    
+    describe "#give_directory_from_data" do
+      it "creates directory with content from data" do
+        path = given_directory_from_data "welcome"
+        expect( path ).to match /\/welcome$/
+      end
+      
+      it "creates directory with content from named data" do
+        path = given_directory_from_data "hi", :from => "welcome"
+        expect( path ).to match /\/hi$/
+      end
+    end
 
     describe "#given_dummy_file" do
       it "creates unnamed dummy file" do

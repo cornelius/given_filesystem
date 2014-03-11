@@ -74,6 +74,34 @@ describe GivenFilesystem do
     expect( File.exists? File.join(path,"two","third")).to be_true
   end
   
+  it "creates directory from data" do
+    path = @given.directory_from_data( "welcome" )
+    expect( path ).to match /\/welcome$/
+    expect( File.exists? path ).to be_true
+    expect( File.directory? path ).to be_true
+    
+    expect( File.exist? File.join( path, "universe" ) ).to be_true
+    expect( File.directory? File.join( path, "universe" ) ).to be_false
+    expect( File.read( File.join( path, "universe" ) ) ).to eq "I was here\n"
+    
+    expect( File.exist? File.join( path, "space" ) ).to be_true
+    expect( File.directory? File.join( path, "space" ) ).to be_true
+  end
+  
+  it "creates directory from data under different name" do
+    path = @given.directory_from_data( "hi", "welcome" )
+    expect( path ).to match /\/hi$/
+    expect( File.exists? path ).to be_true
+    expect( File.directory? path ).to be_true
+    
+    expect( File.exist? File.join( path, "universe" ) ).to be_true
+    expect( File.directory? File.join( path, "universe" ) ).to be_false
+    expect( File.read( File.join( path, "universe" ) ) ).to eq "I was here\n"
+    
+    expect( File.exist? File.join( path, "space" ) ).to be_true
+    expect( File.directory? File.join( path, "space" ) ).to be_true
+  end
+  
   it "returns paths" do
     path1 = @given.directory "one"
     expect( path1 ).to match /^\/tmp\/given_filesystem\/[\d-]+\/one$/

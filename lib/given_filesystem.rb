@@ -47,6 +47,18 @@ class GivenFilesystem
     @path.pop
     created_path
   end
+  
+  def directory_from_data to, from = nil
+    from ||= to
+    if @path.last == "given_filesystem"
+      @path.push random_name
+      @base_paths.push path
+    end
+    FileUtils.mkdir_p path
+    @path.push to
+    FileUtils.cp_r test_data_path(from), path
+    path
+  end
 
   def file file_name = nil, options = {}
     if !file_name || @path.last == "given_filesystem"

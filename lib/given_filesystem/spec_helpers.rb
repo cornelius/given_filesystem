@@ -47,6 +47,11 @@ module GivenFilesystemSpecHelpers
     path
   end
   
+  def given_directory_from_data directory_name, options = {}
+    check_initialization
+    path = @given_filesystem.directory_from_data directory_name, options[:from]
+  end
+  
   def given_file file_name, options = {}
     check_initialization
     if !options[:from]
