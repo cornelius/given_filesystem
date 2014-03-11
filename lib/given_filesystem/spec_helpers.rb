@@ -27,29 +27,29 @@ module GivenFilesystemSpecHelpers
 
   def use_given_filesystem
     before do
-      @given_filesystem = GivenFilesystem.new
+      @__given_filesystem = GivenFilesystem.new
     end
     
     after do
-      @given_filesystem.cleanup
+      @__given_filesystem.cleanup
     end
   end
   
   def given_directory directory_name = nil
     check_initialization
     if block_given?
-      path = @given_filesystem.directory directory_name do
+      path = @__given_filesystem.directory directory_name do
         yield
       end
     else
-      path = @given_filesystem.directory directory_name
+      path = @__given_filesystem.directory directory_name
     end
     path
   end
   
   def given_directory_from_data directory_name, options = {}
     check_initialization
-    path = @given_filesystem.directory_from_data directory_name, options[:from]
+    path = @__given_filesystem.directory_from_data directory_name, options[:from]
   end
   
   def given_file file_name, options = {}
@@ -57,18 +57,18 @@ module GivenFilesystemSpecHelpers
     if !options[:from]
       options[:from] = file_name
     end
-    @given_filesystem.file file_name, options
+    @__given_filesystem.file file_name, options
   end
   
   def given_dummy_file file_name = nil
     check_initialization
-    @given_filesystem.file file_name
+    @__given_filesystem.file file_name
   end
   
   private
   
   def check_initialization
-    if !@given_filesystem
+    if !@__given_filesystem
       raise "Call use_given_filesystem before calling other methods"
     end
   end
