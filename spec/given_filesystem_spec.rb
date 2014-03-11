@@ -10,7 +10,7 @@ describe GivenFilesystem do
     @given.cleanup
   end
   
-  it "creates direcory" do
+  it "creates directory" do
     path = @given.directory
     expect( File.exists? path ).to be_true
     expect( File.directory? path ).to be_true
