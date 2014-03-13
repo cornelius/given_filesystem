@@ -37,8 +37,7 @@ class GivenFilesystem
 
   def directory dir_name = nil
     if !dir_name || @path_elements.last == "given_filesystem"
-      @path_elements.push random_name
-      @base_paths.push path
+      create_random_base_path
     end
     @path_elements.push dir_name if dir_name
     created_path = path
@@ -51,8 +50,7 @@ class GivenFilesystem
   def directory_from_data to, from = nil
     from ||= to
     if @path_elements.last == "given_filesystem"
-      @path_elements.push random_name
-      @base_paths.push path
+      create_random_base_path
     end
     FileUtils.mkdir_p path
     @path_elements.push to
@@ -62,8 +60,7 @@ class GivenFilesystem
 
   def file file_name = nil, options = {}
     if !file_name || @path_elements.last == "given_filesystem"
-      @path_elements.push random_name
-      @base_paths.push path
+      create_random_base_path
       if file_name
         FileUtils.mkdir_p path
       end
@@ -86,6 +83,11 @@ class GivenFilesystem
   end
 
   private
+  
+  def create_random_base_path
+    @path_elements.push random_name
+    @base_paths.push path
+  end
   
   def random_name
     "#{Time.now.strftime("%Y%m%d")}-#{rand(99999).to_s}"
