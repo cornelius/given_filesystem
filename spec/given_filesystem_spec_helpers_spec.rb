@@ -18,6 +18,18 @@ describe GivenFilesystem do
     end
   end
   
+  context "with keeping of files enabled" do
+    use_given_filesystem :keep_files => true
+    
+    it "creates directories" do
+      path = given_directory "hello"
+      expect( File.exists? path ).to be_true
+      
+      # Manually clean up, so test doesn't leave files around
+      @__given_filesystem.cleanup
+    end  
+  end
+  
   context "using the module" do
     use_given_filesystem
 
