@@ -36,7 +36,7 @@ class GivenFilesystem
   end
 
   def directory dir_name = nil
-    if !dir_name || !path_has_base
+    if !dir_name || !path_has_base?
       create_random_base_path
     end
     @path_elements.push dir_name if dir_name
@@ -49,7 +49,7 @@ class GivenFilesystem
   
   def directory_from_data to, from = nil
     from ||= to
-    if !path_has_base
+    if !path_has_base?
       create_random_base_path
     end
     FileUtils.mkdir_p path
@@ -59,7 +59,7 @@ class GivenFilesystem
   end
 
   def file file_name = nil, options = {}
-    if !file_name || !path_has_base
+    if !file_name || !path_has_base?
       create_random_base_path
       if file_name
         FileUtils.mkdir_p path
@@ -97,7 +97,7 @@ class GivenFilesystem
     @path_elements.join("/")
   end
   
-  def path_has_base
+  def path_has_base?
     @path_elements.count > 2
   end
   
