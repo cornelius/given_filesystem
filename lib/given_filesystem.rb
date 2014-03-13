@@ -36,10 +36,16 @@ class GivenFilesystem
   end
 
   def directory dir_name = nil
-    if !dir_name || !path_has_base?
+    if !path_has_base?
       create_random_base_path
     end
-    @path_elements.push dir_name if dir_name
+
+    if dir_name
+      @path_elements.push dir_name
+    else
+      @path_elements.push random_name
+    end
+
     created_path = path
     FileUtils.mkdir_p created_path
     yield if block_given?
@@ -49,9 +55,11 @@ class GivenFilesystem
   
   def directory_from_data to, from = nil
     from ||= to
+
     if !path_has_base?
       create_random_base_path
     end
+
     FileUtils.mkdir_p path
     @path_elements.push to
     FileUtils.cp_r test_data_path(from), path
@@ -59,13 +67,17 @@ class GivenFilesystem
   end
 
   def file file_name = nil, options = {}
-    if !file_name || !path_has_base?
+    if !path_has_base?
       create_random_base_path
-      if file_name
-        FileUtils.mkdir_p path
-      end
+      FileUtils.mkdir_p path
     end
-    @path_elements.push file_name if file_name
+    
+    if file_name
+      @path_elements.push file_name
+    else
+      @path_elements.push random_name
+    end
+
     created_path = path
     File.open(created_path,"w") do |file|
       if options[:from]

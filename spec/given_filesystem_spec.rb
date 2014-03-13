@@ -18,6 +18,15 @@ describe GivenFilesystem do
     expect( path.split("/").length).to be > 3
   end
   
+  it "creates nested unnamed directories" do
+    nested_path = nil
+    path = @given.directory do
+      nested_path = @given.directory
+    end
+    expect( File.exists? nested_path ).to be_true
+    expect( nested_path.split("/").count ).to eq path.split("/").count + 1
+  end
+  
   it "creates named directory" do
     path = @given.directory "abc"
     expect( path ).to match /tmp/
