@@ -22,7 +22,7 @@ require "tmpdir"
 
 class GivenFilesystem
   def initialize
-    @path = [ Dir.tmpdir, "given_filesystem" ]
+    @path_elements = [ Dir.tmpdir, "given_filesystem" ]
     @base_paths = Array.new
   end
   
@@ -36,39 +36,39 @@ class GivenFilesystem
   end
 
   def directory dir_name = nil
-    if !dir_name || @path.last == "given_filesystem"
-      @path.push random_name
+    if !dir_name || @path_elements.last == "given_filesystem"
+      @path_elements.push random_name
       @base_paths.push path
     end
-    @path.push dir_name if dir_name
+    @path_elements.push dir_name if dir_name
     created_path = path
     FileUtils.mkdir_p created_path
     yield if block_given?
-    @path.pop
+    @path_elements.pop
     created_path
   end
   
   def directory_from_data to, from = nil
     from ||= to
-    if @path.last == "given_filesystem"
-      @path.push random_name
+    if @path_elements.last == "given_filesystem"
+      @path_elements.push random_name
       @base_paths.push path
     end
     FileUtils.mkdir_p path
-    @path.push to
+    @path_elements.push to
     FileUtils.cp_r test_data_path(from), path
     path
   end
 
   def file file_name = nil, options = {}
-    if !file_name || @path.last == "given_filesystem"
-      @path.push random_name
+    if !file_name || @path_elements.last == "given_filesystem"
+      @path_elements.push random_name
       @base_paths.push path
       if file_name
         FileUtils.mkdir_p path
       end
     end
-    @path.push file_name if file_name
+    @path_elements.push file_name if file_name
     created_path = path
     File.open(created_path,"w") do |file|
       if options[:from]
@@ -81,7 +81,7 @@ class GivenFilesystem
         file.puts "GivenFilesystem was here"
       end
     end
-    @path.pop
+    @path_elements.pop
     created_path
   end
   
@@ -90,7 +90,7 @@ class GivenFilesystem
   end
   
   def path
-    @path.join("/")
+    @path_elements.join("/")
   end
   
   def test_data_path name
