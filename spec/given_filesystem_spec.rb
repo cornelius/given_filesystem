@@ -29,9 +29,18 @@ describe GivenFilesystem do
   
   it "creates named directory" do
     path = @given.directory "abc"
+    expect( File.exists? path ).to be_true
     expect( path ).to match /tmp/
     expect( path.split("/").length).to be > 4
     expect( path ).to match /abc$/    
+  end
+  
+  it "creates named directory including path" do
+    path = @given.directory "abc"
+    deep_path = @given.directory "x/y/z"
+    expect( File.exists? deep_path ).to be_true
+    expect( File.directory? deep_path ).to be_true
+    expect( deep_path.split("/").count ).to eq path.split("/").count + 2
   end
   
   it "creates file" do
@@ -47,6 +56,14 @@ describe GivenFilesystem do
     expect( path ).to match /tmp/
     expect( path.split("/").length).to be > 4
     expect( path ).to match /def$/
+  end
+  
+  it "creates named file including path" do
+    path = @given.file "def"
+    deep_path = @given.file "x/y/z"
+    expect( File.exists? deep_path ).to be_true
+    expect( File.directory? deep_path ).to be_false
+    expect( deep_path.split("/").count ).to eq path.split("/").count + 2    
   end
   
   it "throws error on invalid test data file name" do

@@ -69,7 +69,6 @@ class GivenFilesystem
   def file file_name = nil, options = {}
     if !path_has_base?
       create_random_base_path
-      FileUtils.mkdir_p path
     end
     
     if file_name
@@ -77,7 +76,9 @@ class GivenFilesystem
     else
       @path_elements.push random_name
     end
-
+ 
+    FileUtils.mkdir_p File.dirname(path)
+ 
     created_path = path
     File.open(created_path,"w") do |file|
       if options[:from]
