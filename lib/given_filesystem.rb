@@ -84,6 +84,8 @@ class GivenFilesystem
     @path_elements.pop
     created_path
   end
+
+  private
   
   def random_name
     "#{Time.now.strftime("%Y%m%d")}-#{rand(99999).to_s}"
