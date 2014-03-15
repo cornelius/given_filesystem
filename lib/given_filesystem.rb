@@ -103,7 +103,7 @@ class GivenFilesystem
   end
   
   def random_name
-    "#{Time.now.strftime("%Y%m%d")}-#{rand(99999).to_s}"
+    "#{Process.pid}-#{Time.now.strftime("%Y%m%d")}-#{rand(99999).to_s}"
   end
   
   def path
