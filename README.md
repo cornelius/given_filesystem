@@ -28,6 +28,16 @@ describe "some test" do
 end
 ```
 
+The activation with `use_given_filesystem` gives you fine-grained control
+about how the test directories are handled. It takes a parameter to keep the
+created test files around:
+
+```ruby
+use_given_filesystem( :keep_files => true )
+```
+
+This can be useful when debugging tests.
+
 
 ### File fixtures
 
@@ -52,11 +62,29 @@ path = given_directory
 
 Use the returned path to access the directory.
 
-Create a temporary directory with a given name for writing test data:
+Create an empty temporary directory with a given name for writing test data:
 
 ```ruby
 path = given_directory "myname"
 ```
+
+Create a temporary directory with a given from data you provide in the
+directory `spec/data` of your project:
+
+```ruby
+path = given_directory_from_data "myname"
+```
+
+This copies the directory `spec/data/myname` to a temporary test directory
+and returns the path to the `myname` directory.
+
+You can also create the directory under a different name:
+
+```ruby
+path = given_directory_from_data "myothername", :from => "myname"
+```
+
+This will copy the same data, but put it into a directory named `myothername`.
 
 
 ### Creating files
@@ -101,26 +129,50 @@ path = given_directory "mydir" do
     given_file "myfile"
     given_file "myotherfile"
   end
-  given_diretory "two" do
+  given_directory "two" do
     given_file "myfile2", :from => "myfile"
   end
 end
 ```
 
 This will create the following file system structure and return the path to the
-temporary directory, which you can then use in your tests to access the data:
+temporary directory `mydir`, which you can then use in your tests to access the
+data:
 
 ```
 /tmp/
   given_filesystem/
-    20140216-74592/
-      one/
-        myfile
-        myotherfile
-      two/
-        myfile2
+    3845-20140216-74592/
+      mydir/
+        one/
+          myfile
+          myotherfile
+        two/
+          myfile2
 ```
 
+### Using directory structures in name parameters
+
+All directory or file name parameters can contain additional directory
+structure. The required nested directories are automatically created. For
+example the call
+
+```ruby
+  given_directory( "a/b/c" )
+```
+
+will create the following structure:
+
+```
+/tmp/
+  given_filesystem/
+    7373-2014-03-15-98223/
+      a/
+        b/
+          c/
+```
+
+and return the path to the directory `a`.
 
 ## License
 
