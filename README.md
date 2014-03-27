@@ -29,8 +29,8 @@ end
 ```
 
 The activation with `use_given_filesystem` gives you fine-grained control
-about how the test directories are handled. It takes a parameter to keep the
-created test files around:
+about in which scope the test directories are created. It takes a parameter to
+optionally keep the created test files around:
 
 ```ruby
 use_given_filesystem( :keep_files => true )
