@@ -36,15 +36,9 @@ class GivenFilesystem
   end
 
   def directory dir_name = nil
-    if !path_has_base?
-      create_random_base_path
-    end
+    create_random_base_path unless path_has_base?
 
-    if dir_name
-      @path_elements.push dir_name
-    else
-      @path_elements.push random_name
-    end
+    @path_elements.push dir_name || random_name
 
     created_path = path
     FileUtils.mkdir_p created_path
@@ -56,9 +50,7 @@ class GivenFilesystem
   def directory_from_data to, from = nil
     from ||= to
 
-    if !path_has_base?
-      create_random_base_path
-    end
+    create_random_base_path unless path_has_base?
 
     FileUtils.mkdir_p path
     @path_elements.push to
@@ -67,9 +59,7 @@ class GivenFilesystem
   end
 
   def file file_name = nil, options = {}
-    if !path_has_base?
-      create_random_base_path
-    end
+    create_random_base_path unless path_has_base?
     
     if file_name
       @path_elements.push file_name
