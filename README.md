@@ -97,7 +97,7 @@ path = given_dummy_file
 
 Use the returned path to access the file.
 
-Create a temporary file with given content take from a file fixture:
+Create a temporary file with given content taken from a file fixture:
 
 ```ruby
 path = given_file "myfixture"
