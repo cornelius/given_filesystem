@@ -124,6 +124,8 @@ describe GivenFilesystem do
     expect( File.directory? File.join( path, "universe" ) ).to be_false
     expect( File.read( File.join( path, "universe" ) ) ).to eq "I was here\n"
     
+    system "find #{path}"
+    
     expect( File.exist? File.join( path, "space" ) ).to be_true
     expect( File.directory? File.join( path, "space" ) ).to be_true
   end
