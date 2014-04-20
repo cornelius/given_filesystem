@@ -1,5 +1,6 @@
 # GivenFilesystem
 
+[![Gem Version](https://badge.fury.io/rb/given_filesystem.svg)](http://badge.fury.io/rb/given_filesystem)
 [![Build Status](https://travis-ci.org/cornelius/given_filesystem.svg?branch=master)](https://travis-ci.org/cornelius/given_filesystem)
 
 GivenFilesystem is a set of helpers for testing code which operates on file
