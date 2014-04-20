@@ -1,1 +1,3 @@
 .rspec
+Gemfile.lock
+*.gem
