@@ -1,5 +1,7 @@
 # GivenFilesystem
 
+[![Build Status](https://travis-ci.org/cornelius/given_filesystem.svg?branch=master)](https://travis-ci.org/cornelius/given_filesystem)
+
 GivenFilesystem is a set of helpers for testing code which operates on file
 systems. It lets you create temporary directories and files with given content as
 test data. You can write to these directories and GivenFilesystem takes care of
