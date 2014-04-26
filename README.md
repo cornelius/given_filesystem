@@ -2,6 +2,7 @@
 
 [![Gem Version](https://badge.fury.io/rb/given_filesystem.svg)](http://badge.fury.io/rb/given_filesystem)
 [![Build Status](https://travis-ci.org/cornelius/given_filesystem.svg?branch=master)](https://travis-ci.org/cornelius/given_filesystem)
+[![Coverage Status](https://coveralls.io/repos/cornelius/given_filesystem/badge.png?branch=master)](https://coveralls.io/r/cornelius/given_filesystem?branch=master)
 [![Code Climate](https://codeclimate.com/github/cornelius/given_filesystem.png)](https://codeclimate.com/github/cornelius/given_filesystem)
 
 GivenFilesystem is a set of helpers for testing code which operates on file
