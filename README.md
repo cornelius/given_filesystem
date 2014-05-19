@@ -22,7 +22,7 @@ To use the GivenFilesystem helpers in a RSpec test you have to include the
 set up the temporary test directory by calling `use_given_filesystem`:
 
 ```ruby
-include GivenFileSystemSpecHelpers
+include GivenFilesystemSpecHelpers
 
 describe "some test" do
   use_given_filesystem
