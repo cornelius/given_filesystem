@@ -23,7 +23,7 @@ describe GivenFilesystemSpecHelpers do
     
     it "creates directories" do
       path = given_directory "hello"
-      expect( File.exists? path ).to be_true
+      expect( File.exists? path ).to be(true)
       
       # Manually clean up, so test doesn't leave files around
       @__given_filesystem.cleanup
@@ -36,8 +36,8 @@ describe GivenFilesystemSpecHelpers do
     describe "#given_directory" do
       it "creates unnamed directory" do
         path = given_directory
-        expect( File.exists? path ).to be_true
-        expect( File.directory? path ).to be_true
+        expect( File.exists? path ).to be(true)
+        expect( File.directory? path ).to be(true)
       end
       
       it "creates directory" do
@@ -69,15 +69,15 @@ describe GivenFilesystemSpecHelpers do
     describe "#given_dummy_file" do
       it "creates unnamed dummy file" do
         path = given_dummy_file
-        expect( File.exists? path ).to be_true
-        expect( File.directory? path ).to be_false
+        expect( File.exists? path ).to be(true)
+        expect( File.directory? path ).to be(false)
       end
       
       it "creates named dummy file" do
         path = given_dummy_file "welcome"
         expect( path ).to match /\/welcome$/
-        expect( File.exists? path ).to be_true
-        expect( File.directory? path ).to be_false
+        expect( File.exists? path ).to be(true)
+        expect( File.directory? path ).to be(false)
       end
     end
 
@@ -99,7 +99,7 @@ describe GivenFilesystemSpecHelpers do
         given_directory "hello" do
           path = given_file "world", :from => "testcontent"
         end
-        expect( File.exists? path ).to be_true
+        expect( File.exists? path ).to be(true)
         expect( File.read( path ) ).to eq "This is my test content.\n"
       end
     end

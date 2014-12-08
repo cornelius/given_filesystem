@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = '>= 1.3.6'
   s.rubyforge_project         = 'given_filesystem'
 
-  s.add_development_dependency 'rspec', '~>2.14'
+  s.add_development_dependency 'rspec', '~> 3.0'
   s.files        = `git ls-files`.split("\n")
   s.require_path = 'lib'
 end

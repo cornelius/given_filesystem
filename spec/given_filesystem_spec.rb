@@ -12,8 +12,8 @@ describe GivenFilesystem do
   
   it "creates directory" do
     path = @given.directory
-    expect( File.exists? path ).to be_true
-    expect( File.directory? path ).to be_true
+    expect( File.exists? path ).to be(true)
+    expect( File.directory? path ).to be(true)
     expect( path ).to match /tmp/
     expect( path.split("/").length).to be > 3
   end
@@ -23,13 +23,13 @@ describe GivenFilesystem do
     path = @given.directory do
       nested_path = @given.directory
     end
-    expect( File.exists? nested_path ).to be_true
+    expect( File.exists? nested_path ).to be(true)
     expect( nested_path.split("/").count ).to eq path.split("/").count + 1
   end
   
   it "creates named directory" do
     path = @given.directory "abc"
-    expect( File.exists? path ).to be_true
+    expect( File.exists? path ).to be(true)
     expect( path ).to match /tmp/
     expect( path.split("/").length).to be > 4
     expect( path ).to match /abc$/    
@@ -38,8 +38,8 @@ describe GivenFilesystem do
   it "creates named directory including path" do
     path = @given.directory "abc"
     deep_path = @given.directory "x/y/z"
-    expect( File.exists? deep_path ).to be_true
-    expect( File.directory? deep_path ).to be_true
+    expect( File.exists? deep_path ).to be(true)
+    expect( File.directory? deep_path ).to be(true)
     expect( deep_path.split("/").count ).to eq path.split("/").count + 2
   end
   
@@ -47,8 +47,8 @@ describe GivenFilesystem do
     path = @given.file
     expect( path ).to match /tmp/
     expect( path.split("/").length).to be > 3
-    expect( File.exists? path ).to be_true
-    expect( File.directory? path ).to be_false
+    expect( File.exists? path ).to be(true)
+    expect( File.directory? path ).to be(false)
   end
   
   it "creates named file" do
@@ -61,8 +61,8 @@ describe GivenFilesystem do
   it "creates named file including path" do
     path = @given.file "def"
     deep_path = @given.file "x/y/z"
-    expect( File.exists? deep_path ).to be_true
-    expect( File.directory? deep_path ).to be_false
+    expect( File.exists? deep_path ).to be(true)
+    expect( File.directory? deep_path ).to be(false)
     expect( deep_path.split("/").count ).to eq path.split("/").count + 2    
   end
   
@@ -89,43 +89,43 @@ describe GivenFilesystem do
       end
     end
     
-    expect( File.exists? path).to be_true
-    expect( File.directory? path).to be_true
-    expect( File.exists? File.join(path,"one")).to be_true
-    expect( File.exists? File.join(path,"one")).to be_true
-    expect( File.directory? File.join(path,"one")).to be_true
-    expect( File.directory? File.join(path,"two")).to be_true
-    expect( File.exists? File.join(path,"one","first")).to be_true
-    expect( File.exists? File.join(path,"two","second")).to be_true
-    expect( File.exists? File.join(path,"two","third")).to be_true
+    expect( File.exists? path).to be(true)
+    expect( File.directory? path).to be(true)
+    expect( File.exists? File.join(path,"one")).to be(true)
+    expect( File.exists? File.join(path,"one")).to be(true)
+    expect( File.directory? File.join(path,"one")).to be(true)
+    expect( File.directory? File.join(path,"two")).to be(true)
+    expect( File.exists? File.join(path,"one","first")).to be(true)
+    expect( File.exists? File.join(path,"two","second")).to be(true)
+    expect( File.exists? File.join(path,"two","third")).to be(true)
   end
   
   it "creates directory from data" do
     path = @given.directory_from_data( "welcome" )
     expect( path ).to match /\/welcome$/
-    expect( File.exists? path ).to be_true
-    expect( File.directory? path ).to be_true
+    expect( File.exists? path ).to be(true)
+    expect( File.directory? path ).to be(true)
     
-    expect( File.exist? File.join( path, "universe" ) ).to be_true
-    expect( File.directory? File.join( path, "universe" ) ).to be_false
+    expect( File.exist? File.join( path, "universe" ) ).to be(true)
+    expect( File.directory? File.join( path, "universe" ) ).to be(false)
     expect( File.read( File.join( path, "universe" ) ) ).to eq "I was here\n"
     
-    expect( File.exist? File.join( path, "space" ) ).to be_true
-    expect( File.directory? File.join( path, "space" ) ).to be_true
+    expect( File.exist? File.join( path, "space" ) ).to be(true)
+    expect( File.directory? File.join( path, "space" ) ).to be(true)
   end
   
   it "creates directory from data under different name" do
     path = @given.directory_from_data( "hi", "welcome" )
     expect( path ).to match /\/hi$/
-    expect( File.exists? path ).to be_true
-    expect( File.directory? path ).to be_true
+    expect( File.exists? path ).to be(true)
+    expect( File.directory? path ).to be(true)
     
-    expect( File.exist? File.join( path, "universe" ) ).to be_true
-    expect( File.directory? File.join( path, "universe" ) ).to be_false
+    expect( File.exist? File.join( path, "universe" ) ).to be(true)
+    expect( File.directory? File.join( path, "universe" ) ).to be(false)
     expect( File.read( File.join( path, "universe" ) ) ).to eq "I was here\n"
     
-    expect( File.exist? File.join( path, "space" ) ).to be_true
-    expect( File.directory? File.join( path, "space" ) ).to be_true
+    expect( File.exist? File.join( path, "space" ) ).to be(true)
+    expect( File.directory? File.join( path, "space" ) ).to be(true)
   end
   
   it "returns paths" do
@@ -146,13 +146,13 @@ describe GivenFilesystem do
     path1 = given.directory
     path2 = given.directory
     
-    expect( File.exists? path1).to be_true
-    expect( File.exists? path2).to be_true
+    expect( File.exists? path1).to be(true)
+    expect( File.exists? path2).to be(true)
     
     given.cleanup
     
-    expect( File.exists? path1).to be_false
-    expect( File.exists? path2).to be_false
+    expect( File.exists? path1).to be(false)
+    expect( File.exists? path2).to be(false)
   end
 
 end
