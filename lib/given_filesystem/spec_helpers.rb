@@ -26,12 +26,12 @@ module GivenFilesystemSpecHelpers
   end
 
   def use_given_filesystem options = {}
-    before do
+    around do |example|
       @__given_filesystem = GivenFilesystem.new
-    end
 
-    if !options[:keep_files]
-      after do
+      example.run
+
+      if !options[:keep_files]
         @__given_filesystem.cleanup
       end
     end

@@ -32,6 +32,17 @@ describe GivenFilesystemSpecHelpers do
   
   context "using the module" do
     use_given_filesystem
+    
+    context "in around filters" do
+      around(:each) do |example|
+        given_directory
+        example.run
+      end
+      
+      it "works" do
+        expect(true).to be true
+      end
+    end
 
     describe "#given_directory" do
       it "creates unnamed directory" do
