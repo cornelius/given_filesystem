@@ -67,7 +67,7 @@ describe GivenFilesystem do
   end
 
   it "throws error on invalid test data file name" do
-    expect{@given.file "def", :from => "invalidname"}.to raise_error
+    expect{@given.file "def", :from => "invalidname"}.to raise_error /invalidname/
   end
 
   it "creates file with content" do
