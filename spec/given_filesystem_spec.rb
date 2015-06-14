@@ -100,6 +100,16 @@ describe GivenFilesystem do
     expect( File.exists? File.join(path,"two","third")).to be(true)
   end
 
+  it "creates flat sub directories with data" do
+    path = @given.directory do
+      @given.directory_from_data "welcome"
+      @given.directory_from_data "hello"
+    end
+
+    expect(File.directory? File.join(path,"welcome")).to be(true)
+    expect(File.directory? File.join(path,"hello")).to be(true)
+  end
+
   it "creates directory from data" do
     path = @given.directory_from_data( "welcome" )
     expect( path ).to match /\/welcome$/

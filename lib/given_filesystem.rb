@@ -1,4 +1,4 @@
-# Copyright (c) 2014 Cornelius Schumacher <schumacher@kde.org>
+# Copyright (c) 2014-2015 Cornelius Schumacher <schumacher@kde.org>
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -54,8 +54,11 @@ class GivenFilesystem
 
     FileUtils.mkdir_p path
     @path_elements.push to
+
+    created_path = path
     FileUtils.cp_r test_data_path(from), path
-    path
+    @path_elements.pop
+    created_path
   end
 
   def file file_name = nil, options = {}
