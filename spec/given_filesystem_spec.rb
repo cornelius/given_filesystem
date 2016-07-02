@@ -81,11 +81,11 @@ describe GivenFilesystem do
   it "creates directory tree" do
     path = @given.directory do
       @given.directory "one" do
-	@given.file "first"
+        @given.file "first"
       end
       @given.directory "two" do
-	@given.file "second"
-	@given.file "third"
+        @given.file "second"
+        @given.file "third"
       end
     end
 
