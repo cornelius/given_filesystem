@@ -10,11 +10,13 @@ describe GivenFilesystem do
     @given.cleanup
   end
 
+  let(:os_specific_tmp_path) { Dir.tmpdir }
+
   it "creates directory" do
     path = @given.directory
     expect( File.exists? path ).to be(true)
     expect( File.directory? path ).to be(true)
-    expect( path ).to match /tmp/
+    expect( path ).to be_located_under os_specific_tmp_path
     expect( path.split("/").length).to be > 3
   end
 
@@ -30,7 +32,7 @@ describe GivenFilesystem do
   it "creates named directory" do
     path = @given.directory "abc"
     expect( File.exists? path ).to be(true)
-    expect( path ).to match /tmp/
+    expect( path ).to be_located_under os_specific_tmp_path
     expect( path.split("/").length).to be > 4
     expect( path ).to match /abc$/
   end
@@ -45,7 +47,7 @@ describe GivenFilesystem do
 
   it "creates file" do
     path = @given.file
-    expect( path ).to match /tmp/
+    expect( path ).to be_located_under os_specific_tmp_path
     expect( path.split("/").length).to be > 3
     expect( File.exists? path ).to be(true)
     expect( File.directory? path ).to be(false)
@@ -53,7 +55,7 @@ describe GivenFilesystem do
 
   it "creates named file" do
     path = @given.file "def"
-    expect( path ).to match /tmp/
+    expect( path ).to be_located_under os_specific_tmp_path
     expect( path.split("/").length).to be > 4
     expect( path ).to match /def$/
   end
@@ -72,7 +74,7 @@ describe GivenFilesystem do
 
   it "creates file with content" do
     path = @given.file "def", :from => "testcontent"
-    expect( path ).to match /tmp/
+    expect( path ).to be_located_under os_specific_tmp_path
     expect( path.split("/").length).to be > 4
     expect( path ).to match /def$/
     expect( File.read(path) ).to eq "This is my test content.\n"
@@ -140,15 +142,15 @@ describe GivenFilesystem do
 
   it "returns paths" do
     path1 = @given.directory "one"
-    expect( path1 ).to match /^\/tmp\/given_filesystem\/[\d-]+\/one$/
+    expect( path1 ).to match /^#{Regexp.quote os_specific_tmp_path}\/given_filesystem\/[\d-]+\/one$/
 
     path2 = @given.directory "two"
-    expect( path2 ).to match /^\/tmp\/given_filesystem\/[\d-]+\/two$/
+    expect( path2 ).to match /^#{Regexp.quote os_specific_tmp_path}\/given_filesystem\/[\d-]+\/two$/
 
     path3 = @given.directory "three" do
       @given.file "first"
     end
-    expect( path3 ).to match /^\/tmp\/given_filesystem\/[\d-]+\/three$/
+    expect( path3 ).to match /^#{Regexp.quote os_specific_tmp_path}\/given_filesystem\/[\d-]+\/three$/
   end
 
   it "cleans up directory tree" do
