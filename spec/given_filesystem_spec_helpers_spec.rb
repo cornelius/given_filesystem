@@ -56,6 +56,11 @@ describe GivenFilesystemSpecHelpers do
         expect( path ).to match /\/hello$/
       end
 
+      it "creates entire directory structure" do
+        path = given_directory "some/directory/structure"
+        expect( path ).to match /\/some$/
+      end
+
       it "creates nested directory" do
         path = nil
         given_directory "hello" do
