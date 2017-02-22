@@ -35,16 +35,19 @@ class GivenFilesystem
     end
   end
 
-  def directory dir_name = nil
+  def directory user_provided_directory = nil
     create_random_base_path unless path_has_base?
 
-    @path_elements.push dir_name || random_name
+    directory_to_create = user_provided_directory || random_name
+
+    @path_elements.push directory_to_create
 
     created_path = path
     FileUtils.mkdir_p created_path
     yield if block_given?
     @path_elements.pop
-    created_path
+
+    File.join path, first_segment_of_path(directory_to_create)
   end
   
   def directory_from_data to, from = nil
@@ -109,5 +112,9 @@ class GivenFilesystem
   
   def test_data_path name
     File.expand_path('spec/data/' + name)
+  end
+
+  def first_segment_of_path path
+    path.split(File::SEPARATOR).reject(&:empty?).first
   end
 end
