@@ -42,7 +42,7 @@ describe GivenFilesystem do
     deep_path = @given.directory "x/y/z"
     expect( File.exists? deep_path ).to be(true)
     expect( File.directory? deep_path ).to be(true)
-    expect( deep_path.split("/").count ).to eq path.split("/").count + 2
+    expect( deep_path.split("/").count ).to eq path.split("/").count
   end
 
   it "creates file" do
