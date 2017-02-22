@@ -6,3 +6,5 @@ SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
 ])
 
 require_relative('../lib/given_filesystem/spec_helpers')
+
+require_relative 'support/matchers/file_location_matcher'
