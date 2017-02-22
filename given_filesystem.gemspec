@@ -1,6 +1,8 @@
+require_relative "lib/version.rb"
+
 Gem::Specification.new do |s|
   s.name        = 'given_filesystem'
-  s.version     = '0.1.2'
+  s.version     = VERSION
   s.license     = 'MIT'
   s.platform    = Gem::Platform::RUBY
   s.authors     = ['Cornelius Schumacher']
